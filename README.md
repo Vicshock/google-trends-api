@@ -1,5 +1,6 @@
 # Google Trends API for Python, JavaScript & AI agents (pytrends alternative)
-n![Google Trends API for Python, JavaScript and AI agents](docs/og.png)
+
+![Google Trends API for Python, JavaScript and AI agents](docs/og.png)
 
 **Get Google Trends data as clean JSON in one API call**: interest over time, interest by region, related and rising queries, **Trending Now with search volume**, and keyword ranking beyond 5 terms. No browser, no Google account, no quota to request.
 
