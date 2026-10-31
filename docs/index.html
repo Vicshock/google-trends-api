@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Trends API for Python &amp; JS: pytrends alternative</title>
+<meta name="description" content="Google Trends data as JSON in one call: interest over time, rising queries, Trending Now with search volume. Python, JS, MCP. Try it free.">
+<link rel="canonical" href="https://vicshock.github.io/google-trends-api/">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Google Trends API for Python &amp; JavaScript (pytrends alternative)">
+<meta property="og:description" content="Interest over time, rising queries and Trending Now with search volume, as JSON. Python, JavaScript, cURL and MCP for AI agents.">
+<meta property="og:url" content="https://vicshock.github.io/google-trends-api/">
+<meta property="og:image" content="https://vicshock.github.io/google-trends-api/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vicshock.github.io/google-trends-api/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Google Trends API (Google Trends Scraper)",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any (cloud API)",
+      "url": "https://apify.com/victorrodi/google-trends-api",
+      "sameAs": ["https://github.com/Vicshock/google-trends-api"],
+      "image": "https://vicshock.github.io/google-trends-api/og.png",
+      "description": "Hosted Google Trends API returning JSON: interest over time with growth %, interest by region, related and rising queries, Trending Now with search volume, and keyword ranking for any number of terms.",
+      "offers": {"@type": "Offer", "price": "0.0025", "priceCurrency": "USD", "description": "Per result, platform and proxies included"},
+      "author": {"@type": "Organization", "name": "TrendPulse Data"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Is there an official Google Trends API?", "acceptedAnswer": {"@type": "Answer", "text": "Google opened an alpha API to a small group of testers only. This API returns the same data today, with no application or quota."}},
+        {"@type": "Question", "name": "What is the best pytrends alternative?", "acceptedAnswer": {"@type": "Answer", "text": "pytrends was archived in 2024 and often fails with HTTP 429 errors. This hosted API covers the same functions (interest over time, by region, related queries, trending searches) and handles blocking, retries and proxies for you."}},
+        {"@type": "Question", "name": "Can I compare more than 5 keywords on Google Trends?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Set keywordRanking to true: terms are queried in batches sharing an anchor term and rescaled onto one common 0-100 scale."}},
+        {"@type": "Question", "name": "Does Google Trends give search volume?", "acceptedAnswer": {"@type": "Answer", "text": "Explore data is a relative 0-100 index. Trending Now items include the approximate search volume shown by Google, and this API returns it."}},
+        {"@type": "Question", "name": "How much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "About $0.0025 per result on the Apify Starter plan, less on higher plans. Empty results are never charged and every Apify account gets monthly free credit."}}
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{--bg:#f8fafc;--fg:#0f172a;--muted:#475569;--card:#fff;--line:#e2e8f0;--accent:#0369a1;--code:#0f172a;--codefg:#e2e8f0;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--fg:#e2e8f0;--muted:#94a3b8;--card:#111a2e;--line:#1e293b;--accent:#38bdf8;--code:#020617;--codefg:#e2e8f0;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 64px}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin:.2em 0 .4em}
+h2{margin-top:2.2em;font-size:1.4rem}
+p.lead{font-size:1.15rem;color:var(--muted)}
+a{color:var(--accent)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.btn{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.btn.primary{color:#020617}}
+pre{background:var(--code);color:var(--codefg);padding:16px;border-radius:10px;overflow-x:auto;font-size:.9rem}
+code{font-family:ui-monospace,Consolas,monospace}
+.table{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:10px;font-size:.95rem}
+th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0}
+summary{font-weight:600;cursor:pointer}
+footer{color:var(--muted);font-size:.9rem;margin-top:48px}
+</style>
+</head>
+<body>
+<a href="#start" style="position:absolute;left:-9999px">Skip to quick start</a>
+<main>
+<p><img src="favicon.png" width="48" height="48" alt=""></p>
+<h1>Google Trends API for Python, JavaScript &amp; AI agents</h1>
+<p class="lead">Get Google Trends data as clean JSON in one call: <strong>interest over time</strong> (with growth %), <strong>interest by region</strong>, <strong>rising queries</strong>, <strong>Trending Now with search volume</strong>, and keyword ranking beyond 5 terms. The maintained alternative to the archived <code>pytrends</code>.</p>
+<div class="cta">
+<a class="btn primary" href="https://apify.com/victorrodi/google-trends-api">Try it free on Apify</a>
+<a class="btn" href="https://github.com/Vicshock/google-trends-api">Code examples on GitHub</a>
+</div>
+
+<h2 id="start">Quick start in Python</h2>
+<pre><code>pip install "apify-client&gt;=3"
+
+from apify_client import ApifyClient
+
+client = ApifyClient("&lt;YOUR_APIFY_TOKEN&gt;")
+run = client.actor("victorrodi/google-trends-api").call(run_input={
+    "searchTerms": ["iphone, samsung, pixel"],
+    "geo": "US",
+    "timeRange": "today 12-m",
+})
+for item in client.dataset(run.default_dataset_id).iterate_items():
+    print(item["type"], item.get("summary"))</code></pre>
+
+<h2>What Google Trends data you get</h2>
+<div class="table"><table>
+<tr><th>Data</th><th>Input</th></tr>
+<tr><td>Interest over time with average, peak and growth %</td><td><code>searchTerms</code>, <code>timeRange</code></td></tr>
+<tr><td>Interest by region: countries, states, cities, US metros</td><td><code>dataTypes: ["interestByRegion"]</code></td></tr>
+<tr><td>Related queries, top and rising, including "Breakout"</td><td><code>dataTypes: ["relatedQueries"]</code></td></tr>
+<tr><td>Trending Now: search volume, growth, categories, news (4 h to 7 days)</td><td><code>trendingNowGeos: ["US"]</code></td></tr>
+<tr><td>Rank any number of keywords on one 0-100 scale</td><td><code>keywordRanking: true</code></td></tr>
+<tr><td>YouTube, News, Shopping and Image search trends</td><td><code>property</code></td></tr>
+</table></div>
+
+<h2>Migrating from pytrends</h2>
+<div class="table"><table>
+<tr><th>pytrends</th><th>This API</th></tr>
+<tr><td><code>build_payload(kw_list, timeframe, geo, cat, gprop)</code></td><td><code>searchTerms</code>, <code>timeRange</code>, <code>geo</code>, <code>category</code>, <code>property</code></td></tr>
+<tr><td><code>interest_over_time()</code></td><td><code>dataTypes: ["interestOverTime"]</code></td></tr>
+<tr><td><code>interest_by_region()</code></td><td><code>dataTypes: ["interestByRegion"]</code></td></tr>
+<tr><td><code>related_queries()</code></td><td><code>dataTypes: ["relatedQueries"]</code></td></tr>
+<tr><td><code>trending_searches()</code>, <code>realtime_trending_searches()</code></td><td><code>trendingNowGeos</code>, <code>trendingNowHours</code></td></tr>
+<tr><td><code>TooManyRequestsError</code> (429)</td><td>Handled for you: retries, new IPs, residential fallback</td></tr>
+</table></div>
+
+<h2>JavaScript / Node.js</h2>
+<pre><code>import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: process.env.APIFY_TOKEN });
+const run = await client.actor('victorrodi/google-trends-api').call({ trendingNowGeos: ['US'] });
+const { items } = await client.dataset(run.defaultDatasetId).listItems();</code></pre>
+
+<h2>Use Google Trends from Claude, ChatGPT and Cursor (MCP)</h2>
+<p>Add the <a href="https://mcp.apify.com">Apify MCP server</a> with <code>--actors victorrodi/google-trends-api</code>, then ask your assistant: <em>"What is trending on Google in the UK right now?"</em></p>
+
+<h2>Pricing</h2>
+<p>About <strong>$0.0025 per result</strong>, platform and proxies included, less on higher Apify plans. Empty results are never charged. Every Apify account gets monthly free credit.</p>
+
+<h2>FAQ</h2>
+<details><summary>Is there an official Google Trends API?</summary><p>Google opened an alpha API to a small group of testers only. This API returns the same data today, with no application or quota.</p></details>
+<details><summary>What is the best pytrends alternative?</summary><p>pytrends was archived in 2024 and often fails with HTTP 429 errors. This hosted API covers the same functions and handles blocking, retries and proxies for you.</p></details>
+<details><summary>Can I compare more than 5 keywords?</summary><p>Yes. Set <code>keywordRanking: true</code>: terms are queried in batches sharing an anchor term and rescaled onto one 0-100 scale.</p></details>
+<details><summary>Does Google Trends give search volume?</summary><p>Explore data is a relative 0-100 index. Trending Now items include the approximate search volume shown by Google, and this API returns it.</p></details>
+<details><summary>How much does it cost?</summary><p>About $0.0025 per result on the Apify Starter plan. Empty results are never charged.</p></details>
+
+<div class="cta"><a class="btn primary" href="https://apify.com/victorrodi/google-trends-api">Start with free credit</a></div>
+<footer>TrendPulse Data · <a href="https://github.com/Vicshock/google-trends-api">GitHub</a> · <a href="llms.txt">llms.txt</a> · Collects public, aggregated, anonymous statistics only.</footer>
+</main>
+</body>
+</html>

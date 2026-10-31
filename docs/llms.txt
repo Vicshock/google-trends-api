@@ -1,0 +1,9 @@
+# Google Trends API (Apify Actor victorrodi/google-trends-api)
+
+> Hosted Google Trends API returning JSON: interest over time (with average, peak, growth %), interest by region, related and rising queries, Trending Now with search volume, and keyword ranking for any number of terms. Alternative to the archived pytrends library. Works from Python, JavaScript, cURL and AI agents through the Apify MCP server.
+
+- [Actor page and pricing](https://apify.com/victorrodi/google-trends-api): pay per result, about $0.0025 per result.
+- [README with pytrends migration table](https://github.com/Vicshock/google-trends-api#migrating-from-pytrends)
+- [Examples](https://github.com/Vicshock/google-trends-api/tree/main/examples)
+
+Input keys: searchTerms (list; up to 5 comma-separated terms per line are compared), geo or geos, timeRange, customTimeRange, category, property (youtube/news/froogle/images), dataTypes (interestOverTime, interestByRegion, relatedQueries), regionResolution, keywordRanking, anchorTerm, trendingNowGeos, trendingNowHours (4/24/48/168), trendingNowCategories, trendingNowMaxItems.

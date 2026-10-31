@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vicshock.github.io/google-trends-api/sitemap.xml

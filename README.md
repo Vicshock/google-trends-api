@@ -1,4 +1,5 @@
 # Google Trends API for Python, JavaScript & AI agents (pytrends alternative)
+n![Google Trends API for Python, JavaScript and AI agents](docs/og.png)
 
 **Get Google Trends data as clean JSON in one API call**: interest over time, interest by region, related and rising queries, **Trending Now with search volume**, and keyword ranking beyond 5 terms. No browser, no Google account, no quota to request.
 
@@ -130,6 +131,7 @@ Pay per result, platform and proxies included: about **$0.0025 per result** on t
 ## Links
 
 - Actor page: https://apify.com/victorrodi/google-trends-api
+- Docs website: https://vicshock.github.io/google-trends-api/
 - Issues and feature requests: open an issue here or on the Actor page.
 
 License: MIT (examples and docs in this repository).
