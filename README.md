@@ -21,11 +21,13 @@ pip install "apify-client>=3"
 from apify_client import ApifyClient
 
 client = ApifyClient("<YOUR_APIFY_TOKEN>")  # free token: https://console.apify.com/account/integrations
-run = client.actor("victorrodi/google-trends-api").call(run_input={
-    "searchTerms": ["iphone, samsung, pixel"],   # up to 5 terms per line are compared
-    "geo": "US",
-    "timeRange": "today 12-m",
-})
+run = client.actor("victorrodi/google-trends-api").call(
+    run_input={
+        "searchTerms": ["iphone, samsung, pixel"],  # up to 5 terms per line are compared
+        "geo": "US",
+        "timeRange": "today 12-m",
+    }
+)
 for item in client.dataset(run.default_dataset_id).iterate_items():
     print(item["type"], item.get("summary"))
 ```
@@ -95,7 +97,34 @@ curl -X POST "https://api.apify.com/v2/acts/victorrodi~google-trends-api/run-syn
 
 ## Use Google Trends from Claude, ChatGPT, Cursor (MCP)
 
-The Actor is available to AI assistants through the [Apify MCP server](https://mcp.apify.com). Example config for Claude Desktop, Claude Code or Cursor:
+### Option 1: `google-trends-mcp` (this repo, 4 focused tools)
+
+| Tool | What it returns |
+|---|---|
+| `google_trends_interest` | Interest over time for up to 5 terms, with average, peak, latest and growth % |
+| `google_trends_related_queries` | Top and rising queries for a term, incl. "Breakout" |
+| `google_trends_trending_now` | What a country searches right now, with search volume and news |
+| `google_trends_rank_keywords` | Any number of keywords ranked on one 0-100 scale |
+
+Claude Desktop / Cursor config (needs [uv](https://docs.astral.sh/uv/)):
+
+```json
+{
+  "mcpServers": {
+    "google-trends": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/Vicshock/google-trends-api", "google-trends-mcp"],
+      "env": { "APIFY_TOKEN": "<YOUR_APIFY_TOKEN>" }
+    }
+  }
+}
+```
+
+Claude Code: `claude mcp add google-trends -e APIFY_TOKEN=<YOUR_APIFY_TOKEN> -- uvx --from git+https://github.com/Vicshock/google-trends-api google-trends-mcp`
+
+Each tool call is capped at $0.50 (`GOOGLE_TRENDS_MAX_CHARGE_USD` to change it); a typical call costs under one cent.
+
+### Option 2: the Apify MCP server
 
 ```json
 {

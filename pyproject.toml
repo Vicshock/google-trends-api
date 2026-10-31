@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "google-trends-mcp"
+version = "1.0.0"
+description = "MCP server for Google Trends: interest over time, rising queries, Trending Now with search volume, keyword ranking. pytrends alternative for AI agents."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+keywords = ["google-trends", "google-trends-api", "pytrends", "mcp", "model-context-protocol", "claude", "seo", "keyword-research"]
+dependencies = ["mcp>=2.3,<3", "apify-client>=3.4,<4"]
+
+[project.urls]
+Homepage = "https://vicshock.github.io/google-trends-api/"
+Repository = "https://github.com/Vicshock/google-trends-api"
+
+[project.scripts]
+google-trends-mcp = "google_trends_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["google_trends_mcp"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
