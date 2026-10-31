@@ -7,7 +7,7 @@
 [![Run on Apify](https://img.shields.io/badge/Run%20on-Apify-00b37e)](https://apify.com/victorrodi/google-trends-api)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Node.js](https://img.shields.io/badge/node-18%2B-green) ![MCP](https://img.shields.io/badge/MCP-ready-purple)
 
-> `pytrends` was archived in 2024 and now often fails with HTTP 429 errors. This repository shows how to get the same Google Trends data, reliably, through the hosted **[Google Trends Scraper API](https://apify.com/victorrodi/google-trends-api)** on Apify.
+> `pytrends` was archived in April 2025 and now often fails with HTTP 429 errors. This repository shows how to get the same Google Trends data, reliably, through the hosted **[Google Trends Scraper API](https://apify.com/victorrodi/google-trends-api)** on Apify.
 
 ---
 

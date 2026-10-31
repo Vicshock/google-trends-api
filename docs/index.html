@@ -37,7 +37,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         {"@type": "Question", "name": "Is there an official Google Trends API?", "acceptedAnswer": {"@type": "Answer", "text": "Google opened an alpha API to a small group of testers only. This API returns the same data today, with no application or quota."}},
-        {"@type": "Question", "name": "What is the best pytrends alternative?", "acceptedAnswer": {"@type": "Answer", "text": "pytrends was archived in 2024 and often fails with HTTP 429 errors. This hosted API covers the same functions (interest over time, by region, related queries, trending searches) and handles blocking, retries and proxies for you."}},
+        {"@type": "Question", "name": "What is the best pytrends alternative?", "acceptedAnswer": {"@type": "Answer", "text": "pytrends was archived in April 2025 and often fails with HTTP 429 errors. This hosted API covers the same functions (interest over time, by region, related queries, trending searches) and handles blocking, retries and proxies for you."}},
         {"@type": "Question", "name": "Can I compare more than 5 keywords on Google Trends?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Set keywordRanking to true: terms are queried in batches sharing an anchor term and rescaled onto one common 0-100 scale."}},
         {"@type": "Question", "name": "Does Google Trends give search volume?", "acceptedAnswer": {"@type": "Answer", "text": "Explore data is a relative 0-100 index. Trending Now items include the approximate search volume shown by Google, and this API returns it."}},
         {"@type": "Question", "name": "How much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "About $0.0025 per result on the Apify Starter plan, less on higher plans. Empty results are never charged and every Apify account gets monthly free credit."}}
@@ -132,7 +132,7 @@ const { items } = await client.dataset(run.defaultDatasetId).listItems();</code>
 
 <h2>FAQ</h2>
 <details><summary>Is there an official Google Trends API?</summary><p>Google opened an alpha API to a small group of testers only. This API returns the same data today, with no application or quota.</p></details>
-<details><summary>What is the best pytrends alternative?</summary><p>pytrends was archived in 2024 and often fails with HTTP 429 errors. This hosted API covers the same functions and handles blocking, retries and proxies for you.</p></details>
+<details><summary>What is the best pytrends alternative?</summary><p>pytrends was archived in April 2025 and often fails with HTTP 429 errors. This hosted API covers the same functions and handles blocking, retries and proxies for you.</p></details>
 <details><summary>Can I compare more than 5 keywords?</summary><p>Yes. Set <code>keywordRanking: true</code>: terms are queried in batches sharing an anchor term and rescaled onto one 0-100 scale.</p></details>
 <details><summary>Does Google Trends give search volume?</summary><p>Explore data is a relative 0-100 index. Trending Now items include the approximate search volume shown by Google, and this API returns it.</p></details>
 <details><summary>How much does it cost?</summary><p>About $0.0025 per result on the Apify Starter plan. Empty results are never charged.</p></details>
